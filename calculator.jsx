@@ -7,7 +7,7 @@ const WinPic = ({ kind }) => {
     balcony: [<rect key="a" x="6" y="6" width="30" height="34" rx="2"></rect>, <rect key="b" x="40" y="6" width="18" height="52" rx="2"></rect>],
   };
   return (
-    <svg viewBox="0 0 64 64" width="56" height="56" fill="none" stroke="currentColor" strokeWidth="2.4">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 64 64" width="56" height="56" fill="none" stroke="currentColor" strokeWidth="2.4">
       {frames[kind]}
     </svg>
   );
