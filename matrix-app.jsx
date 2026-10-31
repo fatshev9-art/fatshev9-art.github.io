@@ -6,8 +6,8 @@ function MatrixHeadline() {
         <span className="eyebrow">Новосибирск · всё для дома</span>
         <h1 className="mx-h1">Всё для дома в Новосибирске: <span className="mark">от окон до мебели на заказ</span></h1>
         <p className="mx-hero-lead">
-          Окна, балконы, витражи, двери, натяжные потолки, тёплые полы и мебель на заказ.
-          Мебель разложили подробнее: кухни и шкафы-купе с гардеробными вынесены отдельными кнопками.
+          Окна, лоджии, балконы и витражи; кухни, гардеробные, шкафы-купе и другая мебель на заказ;
+          двери, тёплые полы и натяжные потолки.
           Нажмите на нужное: внутри цены, варианты и заявка. Листать весь сайт не нужно.
         </p>
       </div>
@@ -15,16 +15,33 @@ function MatrixHeadline() {
   );
 }
 
-const MX_SUBTILES = [
+const MX_DIR = Object.fromEntries(DIRECTIONS.map((d) => [d.key, d]));
+const MX_TILES = [
+  MX_DIR.okna,
+  { key: "balkony", icon: "loggia", title: "Лоджии", desc: "Остекление и отделка под ключ",
+    price: MX_DIR.balkony.price, unit: MX_DIR.balkony.unit, href: MX_DIR.balkony.href,
+    only: ["Холодное остекление", "Тёплое остекление", "Панорамное остекление", "Отделка под ключ", "Утепление балкона"],
+    rename: { "Утепление балкона": "Утепление лоджии" },
+    iconMap: { "Холодное остекление": "loggia" },
+    subTitle: "Какое остекление лоджии вам нужно",
+    subLead: "Алюминиевое остекление для хранения или тёплое на ПВХ-профиле для жилой комнаты, панорамное в пол, утепление и отделка под ключ." },
+  Object.assign({}, MX_DIR.balkony, { title: "Балконы" }),
+  MX_DIR.vitrazhi,
   { key: "kuhni", icon: "kitchen", img: "img/pf-7.jpg", title: "Кухни", desc: "Прямые, угловые, П-образные и с островом",
     price: "14 900 ₽", unit: "/пог. м", href: "/kuhni" },
-  { key: "mebel", icon: "wardrobe", img: "img/pf-9.jpg", title: "Шкафы-купе и гардеробные", desc: "Встроенные и корпусные, по вашим размерам",
+  { key: "mebel", icon: "dressing", img: "img/pf-8.jpg", title: "Гардеробные", desc: "Гардеробные комнаты и прихожие по вашим размерам",
+    price: "22 000 ₽", unit: "", href: "/mebel",
+    only: ["Гардеробные на заказ", "Прихожие на заказ"],
+    subTitle: "Какая гардеробная или прихожая вам нужна",
+    subLead: "Гардеробная со стеллажами, штангами и полками или прихожая со шкафом, вешалкой и зеркалом. Соберём по вашим размерам." },
+  { key: "mebel", icon: "wardrobe", img: "img/pf-9.jpg", title: "Шкафы-купе", desc: "Встроенные и корпусные, по вашим размерам",
     price: "11 900 ₽", unit: "/пог. м", href: "/mebel",
-    only: ["Шкафы-купе на заказ", "Встроенные шкафы", "Гардеробные на заказ", "Прихожие на заказ"],
-    subTitle: "Какой шкаф или гардеробную сделать",
-    subLead: "Встроенный или корпусный шкаф-купе, отдельная гардеробная комната, прихожая. Соберём по вашим размерам." },
+    only: ["Шкафы-купе на заказ", "Встроенные шкафы"],
+    subTitle: "Какой шкаф-купе вам нужен",
+    subLead: "Соберём встроенный или корпусный шкаф-купе по вашим размерам. Двери с зеркалом или из ЛДСП." },
+  MX_DIR.mebel,
+  MX_DIR.dveri_vhod, MX_DIR.dveri_mk, MX_DIR.teplyy_pol, MX_DIR.potolki,
 ];
-const MX_TILES = DIRECTIONS.concat(MX_SUBTILES);
 
 function MatrixCat({ dirTitle, c, onLead }) {
   const Ic = I[c.icon];
@@ -106,6 +123,11 @@ function MatrixGrid({ onLead }) {
   if (dir && dir.only) {
     const picked = cats.filter((c) => dir.only.includes(c.title));
     if (picked.length) cats = picked;   // если названия разъехались, показываем всё направление
+  }
+  if (dir && (dir.rename || dir.iconMap)) {
+    cats = cats.map((c) => Object.assign({}, c,
+      dir.rename && dir.rename[c.title] ? { title: dir.rename[c.title] } : null,
+      dir.iconMap && dir.iconMap[c.title] ? { icon: dir.iconMap[c.title] } : null));
   }
   const headTitle = (dir && dir.subTitle) || (data && data.subTitle) || (dir && dir.title) || "";
   const headLead = (dir && dir.subLead) || (data && data.subLead) || (dir && dir.desc) || "";

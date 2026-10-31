@@ -848,7 +848,7 @@ button.check-row { width: 100%; font: inherit; color: inherit; text-align: left;
 .mx-hero-lead { max-width: 640px; margin: 18px 0 0; font-size: 18px; color: var(--ink-soft); }
 
 .mx-sec { padding-top: 30px; }
-.mx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); gap: 16px; }
+.mx-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .mx-tile {
   display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
   background: var(--surface); border: 1.5px solid var(--line); border-radius: var(--r-lg);
@@ -861,7 +861,7 @@ button.check-row { width: 100%; font: inherit; color: inherit; text-align: left;
 .mx-ic { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: var(--r-md); background: color-mix(in srgb, var(--primary) 12%, var(--surface)); color: var(--primary); margin-bottom: 4px; }
 .mx-ic svg { width: 30px; height: 30px; }
 .mx-tile-title { font-family: var(--font-head); font-weight: 800; font-size: 19px; color: var(--ink); line-height: 1.15; }
-.mx-tile-price { font-size: 15px; color: var(--ink-soft); font-weight: 600; }
+.mx-tile-price { font-size: 15px; color: var(--ink-soft); font-weight: 600; margin-top: auto; }
 .mx-tile-mark { position: absolute; top: 18px; right: 20px; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; border-radius: 999px; background: color-mix(in srgb, var(--primary) 12%, var(--surface)); color: var(--primary); font-weight: 800; font-size: 20px; line-height: 1; }
 .mx-tile.is-active .mx-tile-mark { background: var(--primary); color: var(--primary-ink); }
 
@@ -917,7 +917,7 @@ button.check-row { width: 100%; font: inherit; color: inherit; text-align: left;
   .mx-pay-row { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 680px) {
-  .mx-grid { grid-template-columns: repeat(2, 1fr); }
+  .mx-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mx-panel { padding: 18px 16px; }
   .mx-panel-head { gap: 12px; padding-right: 42px; }
   .mx-panel-headtext h3 { font-size: 20px; }
@@ -931,6 +931,10 @@ button.check-row { width: 100%; font: inherit; color: inherit; text-align: left;
   .mx-panel-foot-cta .btn { width: 100%; justify-content: center; }
   .mx-tile { min-height: 132px; padding: 18px; }
   .mx-tile-title { font-size: 17px; }
+}
+@media (max-width: 360px) {
+  .mx-tile { padding: 14px; }
+  .mx-tile-title { font-size: 15px; overflow-wrap: anywhere; }
 }
 @media (max-width: 420px) {
   .mx-pay-row { grid-template-columns: 1fr 1fr; gap: 12px; }

@@ -89,6 +89,19 @@ const I = {
       <circle cx="15.3" cy="11.5" r="0.9" fill="currentColor"></circle>
     </svg>
   ),
+  loggia: (p) => (
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" {...p}>
+      <path d="M4 13.4h16V21H4z" fill="currentColor" fillOpacity="0.16"></path>
+      <path d="M4 21V4.2a1.2 1.2 0 0 1 1.2-1.2h13.6a1.2 1.2 0 0 1 1.2 1.2V21M4 13.4h16M9.33 3v10.4M14.67 3v10.4M3 21h18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"></path>
+    </svg>
+  ),
+  dressing: (p) => (
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" {...p}>
+      <rect x="4.2" y="3" width="15.6" height="18" rx="1.6" fill="currentColor" fillOpacity="0.16"></rect>
+      <rect x="4.2" y="3" width="15.6" height="18" rx="1.6" stroke="currentColor" strokeWidth="1.8"></rect>
+      <path d="M12 10.2V9a1.7 1.7 0 1 0-1.7-1.7M12 10.2l-5 3.8h10zM4.2 17.4h15.6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"></path>
+    </svg>
+  ),
   floor: (p) => (
     <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M3 9h18"></path><path d="M3 15h18"></path><path d="M3 3h18v18H3z"></path><path d="M9 3v6"></path><path d="M15 9v6"></path><path d="M9 15v6"></path></svg>
   ),
