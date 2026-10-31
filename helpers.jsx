@@ -69,6 +69,26 @@ const I = {
   door: (p) => (
     <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M6 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17"></path><path d="M3 21h18"></path><circle cx="14.6" cy="12.5" r="1"></circle></svg>
   ),
+  doorEntry: (p) => (
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" {...p}>
+      <path d="M6 21V4.6A1.6 1.6 0 0 1 7.6 3h8.8A1.6 1.6 0 0 1 18 4.6V21z" fill="currentColor" fillOpacity="0.16"></path>
+      <path d="M6 21V4.6A1.6 1.6 0 0 1 7.6 3h8.8A1.6 1.6 0 0 1 18 4.6V21" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"></path>
+      <path d="M3 21h18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"></path>
+      <circle cx="12" cy="7" r="1.1" fill="currentColor"></circle>
+      <path d="M13 12.2h2.1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"></path>
+      <circle cx="14.05" cy="15.4" r="1" fill="currentColor"></circle>
+    </svg>
+  ),
+  doorInterior: (p) => (
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" {...p}>
+      <path d="M6 21V4.6A1.6 1.6 0 0 1 7.6 3h8.8A1.6 1.6 0 0 1 18 4.6V21z" fill="currentColor" fillOpacity="0.16"></path>
+      <path d="M6 21V4.6A1.6 1.6 0 0 1 7.6 3h8.8A1.6 1.6 0 0 1 18 4.6V21" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"></path>
+      <path d="M3 21h18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"></path>
+      <rect x="8.5" y="5.6" width="4.3" height="4.6" rx="0.8" stroke="currentColor" strokeWidth="1.5" opacity=".55"></rect>
+      <rect x="8.5" y="12.6" width="4.3" height="5.8" rx="0.8" stroke="currentColor" strokeWidth="1.5" opacity=".55"></rect>
+      <circle cx="15.3" cy="11.5" r="0.9" fill="currentColor"></circle>
+    </svg>
+  ),
   floor: (p) => (
     <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M3 9h18"></path><path d="M3 15h18"></path><path d="M3 3h18v18H3z"></path><path d="M9 3v6"></path><path d="M15 9v6"></path><path d="M9 15v6"></path></svg>
   ),
@@ -220,8 +240,8 @@ const DIRECTIONS = [
   { key: "balkony",    icon: "balcony",  img: "img/dir-balkon.jpg",  title: "Балконы и лоджии",  desc: "Остекление, утепление и отделка под ключ", price: "35 000 ₽", unit: "", href: "/balkony" },
   { key: "vitrazhi",   icon: "vitrage",  img: "img/dir-vitrazh.jpg", title: "Витражи",           desc: "Декоративное остекление для дома и офиса", price: "4 500 ₽", unit: "/м²", href: "/vitrazhi" },
   { key: "teplyy_pol", icon: "heat",     img: "img/dir-teplo.jpg", title: "Тёплые полы",       desc: "Электрические и инфракрасные, под любое покрытие", price: "900 ₽", unit: "/м²", href: "/teplyy-pol" },
-  { key: "dveri_vhod", icon: "door",     img: "img/dir-dveri.jpg",   title: "Входные двери",     desc: "Металлические, с установкой и надёжным замком", price: "15 000 ₽", unit: "", href: "/dveri-vhodnye" },
-  { key: "dveri_mk",   icon: "door",     img: "img/dir-dveri.jpg",   title: "Межкомнатные двери", desc: "Экошпон, массив и шпон, с установкой", price: "3 500 ₽", unit: "", href: "/dveri-mezhkomnatnye" },
+  { key: "dveri_vhod", icon: "doorEntry",     img: "img/dir-dveri.jpg",   title: "Входные двери",     desc: "Металлические, с установкой и надёжным замком", price: "15 000 ₽", unit: "", href: "/dveri-vhodnye" },
+  { key: "dveri_mk",   icon: "doorInterior",     img: "img/dir-dveri.jpg",   title: "Межкомнатные двери", desc: "Экошпон, массив и шпон, с установкой", price: "3 500 ₽", unit: "", href: "/dveri-mezhkomnatnye" },
   { key: "potolki",    icon: "ceiling",  img: "img/dir-potolki.jpg", title: "Натяжные потолки",  desc: "Матовые, глянцевые, сатиновые. Установка без пыли", price: "390 ₽", unit: "/м²", href: "/potolki" },
   { key: "mebel",      icon: "furniture",img: "img/dir-mebel.jpg", title: "Мебель на заказ",   desc: "Кухни, шкафы-купе, гардеробные по вашим размерам", price: "10 900 ₽", unit: "/пог. м", href: "/mebel" },
 ];
