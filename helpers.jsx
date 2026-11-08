@@ -220,12 +220,15 @@ function leadQuery() {
 function sendLead(data) {
   const ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
   const timer = ctrl ? setTimeout(() => ctrl.abort(), 20000) : null;
-  return fetch("/api/lead", {
+  return fetch("https://api.liora-nsk.ru/lead.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(Object.assign({}, data, { page: window.location.pathname, query: leadQuery() })),
     signal: ctrl ? ctrl.signal : undefined,
-  }).then((r) => r.ok, () => false).then((ok) => { clearTimeout(timer); return ok; });
+  }).then((response) => response.ok ? response.json() : null)
+    .then((result) => result !== null && result.ok === true)
+    .catch(() => false)
+    .then((ok) => { clearTimeout(timer); return ok; });
 }
 
 I.kitchen = (p) => (
