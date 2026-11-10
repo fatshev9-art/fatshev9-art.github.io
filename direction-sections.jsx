@@ -84,7 +84,6 @@ function SubcatListing({ d, onLead }) {
           <span className="eyebrow">Каталог</span>
           <h2 className="h-sec" style={{ marginTop: 16 }}>{d.subTitle}</h2>
           <p>{d.subLead}</p>
-          <div style={{ marginTop: 14 }}><TempNote /></div>
         </div>
 
         <div className="listing-bar">
@@ -218,7 +217,6 @@ function ReadySolutions({ d, onLead }) {
           <span className="eyebrow">Готовые решения</span>
           <h2 className="h-sec" style={{ marginTop: 16 }}>Пакеты с фиксированной ценой</h2>
           <p>Понятная цена «под ключ» на типовые квартиры: чтобы вы заранее знали бюджет.</p>
-          <div style={{ marginTop: 14 }}><TempNote /></div>
         </div>
         <div className="ready-grid">
           {d.ready.map((r) => (
