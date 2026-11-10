@@ -45,11 +45,11 @@ function CalcEntry({ onCalc }) {
             <div className="calc-entry-text">
               <span className="eyebrow">Расчёт цены</span>
               <h2 style={{ marginTop: 16 }}>Узнайте, во сколько обойдётся ваш ремонт</h2>
-              <p>Ответьте на несколько вопросов, и покажем цену «от» за пару минут. Точную смету составит замерщик, выезд бесплатный.</p>
+              <p>Ответьте на несколько вопросов, и покажем цену за пару минут. Точную смету составит замерщик, выезд бесплатный.</p>
               <ol className="calc-steps-mini">
                 <li><span className="n">1</span> Выберите направление: окна, потолки или мебель</li>
                 <li><span className="n">2</span> Укажите размеры и материалы</li>
-                <li><span className="n">3</span> Получите примерную цену и точный расчёт после замера</li>
+                <li><span className="n">3</span> Получите цену и точный расчёт после замера</li>
               </ol>
               <button className="btn btn-primary btn-lg" onClick={onCalc}>
                 <I.calc style={{ width: 20, height: 20 }} /> Рассчитать стоимость
@@ -58,9 +58,9 @@ function CalcEntry({ onCalc }) {
             <div className="calc-entry-visual">
               <div className="ring">
                 <div>
-                  <div className="from">примерная цена</div>
-                  <div className="big">от&nbsp;12&nbsp;000&nbsp;₽</div>
-                  <div className="from">за 2 минуты, без звонков</div>
+                  <div className="from">расчёт стоимости</div>
+                  <div className="big">за 2 минуты</div>
+                  <div className="from">без звонков</div>
                 </div>
               </div>
             </div>

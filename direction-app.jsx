@@ -83,7 +83,7 @@ function injectJsonLd(d) {
       name: d.crumb + " в Новосибирске", areaServed: "Новосибирск",
       provider: { "@type": "HomeAndConstructionBusiness", name: "ЛИОРА", telephone: PHONE, areaServed: "Новосибирск",
         address: { "@type": "PostalAddress", addressLocality: "Новосибирск", addressRegion: "Новосибирская область", addressCountry: "RU" } },
-      offers: { "@type": "Offer", price: plainPrice(d.priceFrom), priceCurrency: "RUB", description: "Цена «от» " + d.priceFrom + " " + d.priceWith },
+      offers: { "@type": "Offer", price: plainPrice(d.priceFrom), priceCurrency: "RUB", description: "Цена " + d.priceFrom + (d.priceWith ? ", " + d.priceWith : "") },
     },
     {
       "@context": "https://schema.org", "@type": "FAQPage",
@@ -141,7 +141,6 @@ function DirApp() {
       <CtaStrip onCalc={openCalc} />
       <PriceComposition d={d} />
       <CalcEntry onCalc={openCalc} />
-      <ReadySolutions d={d} onLead={goLead} />
       <Why />
       <Stages />
       <Guarantees d={d} />

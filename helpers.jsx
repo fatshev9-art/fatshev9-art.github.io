@@ -252,14 +252,14 @@ I.wardrobe = (p) => (
 );
 
 const DIRECTIONS = [
-  { key: "okna",       icon: "window",   img: "img/dir-okna.jpg",    title: "Пластиковые окна",  desc: "Замер, доставка и установка за 1 день", price: "12 000 ₽", unit: "", href: "/okna" },
-  { key: "balkony",    icon: "balcony",  img: "img/dir-balkon.jpg",  title: "Балконы и лоджии",  desc: "Остекление, утепление и отделка под ключ", price: "35 000 ₽", unit: "", href: "/balkony" },
-  { key: "vitrazhi",   icon: "vitrage",  img: "img/dir-vitrazh.jpg", title: "Витражи",           desc: "Декоративное остекление для дома и офиса", price: "4 500 ₽", unit: "/м²", href: "/vitrazhi" },
-  { key: "teplyy_pol", icon: "heat",     img: "img/dir-teplo.jpg", title: "Тёплые полы",       desc: "Электрические и инфракрасные, под любое покрытие", price: "900 ₽", unit: "/м²", href: "/teplyy-pol" },
-  { key: "dveri_vhod", icon: "doorEntry",     img: "img/dir-dveri.jpg",   title: "Входные двери",     desc: "Металлические, с установкой и надёжным замком", price: "15 000 ₽", unit: "", href: "/dveri-vhodnye" },
-  { key: "dveri_mk",   icon: "doorInterior",     img: "img/dir-dveri.jpg",   title: "Межкомнатные двери", desc: "Экошпон, массив и шпон, с установкой", price: "3 500 ₽", unit: "", href: "/dveri-mezhkomnatnye" },
-  { key: "potolki",    icon: "ceiling",  img: "img/dir-potolki.jpg", title: "Натяжные потолки",  desc: "Матовые, глянцевые, сатиновые. Установка без пыли", price: "390 ₽", unit: "/м²", href: "/potolki" },
-  { key: "mebel",      icon: "furniture",img: "img/dir-mebel.jpg", title: "Мебель на заказ",   desc: "Кухни, шкафы-купе, гардеробные по вашим размерам", price: "10 900 ₽", unit: "/пог. м", href: "/mebel" },
+  { key: "okna",       icon: "window",   img: "img/dir-okna.jpg",    title: "Пластиковые окна",  desc: "Замер, доставка и установка за 1 день", price: "20 000 ₽", unit: "/м²", href: "/okna" },
+  { key: "balkony",    icon: "balcony",  img: "img/dir-balkon.jpg",  title: "Балконы и лоджии",  desc: "Остекление, утепление и отделка под ключ", price: "70 000 ₽", unit: "", href: "/balkony" },
+  { key: "vitrazhi",   icon: "vitrage",  img: "img/dir-vitrazh.jpg", title: "Витражи",           desc: "Декоративное остекление для дома и офиса", price: "15 000 ₽", unit: "/м²", href: "/vitrazhi" },
+  { key: "teplyy_pol", icon: "heat",     img: "img/dir-teplo.jpg", title: "Тёплые полы",       desc: "Электрические и инфракрасные, под любое покрытие", price: "8 000 ₽", unit: "/м²", href: "/teplyy-pol" },
+  { key: "dveri_vhod", icon: "doorEntry",     img: "img/dir-dveri.jpg",   title: "Входные двери",     desc: "Металлические, с установкой и надёжным замком", price: "40 000 ₽", unit: "", href: "/dveri-vhodnye" },
+  { key: "dveri_mk",   icon: "doorInterior",     img: "img/dir-dveri.jpg",   title: "Межкомнатные двери", desc: "Экошпон, массив и шпон, с установкой", price: "15 000 ₽", unit: "", href: "/dveri-mezhkomnatnye" },
+  { key: "potolki",    icon: "ceiling",  img: "img/dir-potolki.jpg", title: "Натяжные потолки",  desc: "Матовые, глянцевые, сатиновые. Установка без пыли", price: "1 300 ₽", unit: "/м²", href: "/potolki" },
+  { key: "mebel",      icon: "furniture",img: "img/dir-mebel.jpg", title: "Мебель на заказ",   desc: "Кухни, шкафы-купе, гардеробные по вашим размерам", price: "10 000 ₽", unit: "/м²", href: "/mebel" },
 ];
 
 const NUMBERS = [

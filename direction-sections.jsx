@@ -37,7 +37,6 @@ function DirHero({ d, onLead }) {
           <h1 style={{ marginTop: 18 }}>{d.h1}</h1>
           <p className="dhero-lead">{d.lead}</p>
           <div className="dhero-price">
-            <span className="from">от</span>
             <span className="val">{d.priceFrom}</span>
             <span className="with">{d.priceWith}</span>
           </div>
@@ -54,7 +53,7 @@ function DirHero({ d, onLead }) {
           </div>
           <div className="hero-badge b1">
             <div>
-              <div className="big">от {d.priceFrom}</div>
+              <div className="big">{d.priceFrom}</div>
               <small>{d.priceWith}</small>
             </div>
           </div>
@@ -96,14 +95,6 @@ function SubcatListing({ d, onLead }) {
               ))}
             </div>
           ) : <div className="chips" />}
-          <label className="sortby">
-            <I.sliders style={{ width: 17, height: 17 }} /> Сортировка:
-            <select value={sort} onChange={(e) => setSort(e.target.value)} aria-label="Сортировка">
-              <option value="pop">по популярности</option>
-              <option value="asc">сначала дешёвые</option>
-              <option value="desc">сначала дорогие</option>
-            </select>
-          </label>
         </div>
 
         <div className="cat-grid">
@@ -118,11 +109,6 @@ function SubcatListing({ d, onLead }) {
                 <h3>{c.title}</h3>
                 <p className="desc">{c.desc}</p>
                 <div className="cat-avail-row"><span className="avail">{c.avail}</span></div>
-                <div className="cat-price">
-                  <span className="from">от</span>
-                  <span className="val">{c.from}</span>
-                  {c.unit && <span className="unit">{c.unit}</span>}
-                </div>
               </div>
               {c.href ? (
                 <a className="btn btn-outline" href={c.href}>Подробнее</a>
@@ -148,7 +134,6 @@ function SubcatListing({ d, onLead }) {
               <div className={"tier" + (t.featured ? " featured" : "")} key={t.name}>
                 {t.featured && <span className="pop">Чаще выбирают</span>}
                 <h4>{t.name}</h4>
-                <div className="tier-price">{t.price}</div>
                 <ul>
                   {t.items.map((it) => <li key={it}><I.check className="ic" /> {it}</li>)}
                 </ul>
@@ -182,28 +167,28 @@ function CtaStrip({ onCalc }) {
 }
 
 function PriceComposition({ d }) {
+  const hasDetail = d.priceTable.some((r) => r.detail && r.detail !== "—");
   return (
     <section className="section" id="prices" data-screen-label="Цены и состав услуги">
       <div className="wrap">
         <div className="sec-head">
           <span className="eyebrow">Цены и состав</span>
           <h2 className="h-sec" style={{ marginTop: 16 }}>{d.priceTableTitle}</h2>
-          <p>Прозрачные цены по видам работ. Что входит в стандартную установку: без сюрпризов в смете.</p>
-          <div style={{ marginTop: 14 }}><TempNote /></div>
+          <p>Цена за единицу и состав стандартной установки: без сюрпризов в смете.</p>
         </div>
 
         <div className="price-wrap">
           <div className="price-table-scroll">
             <table className="price-table">
               <thead>
-                <tr><th>Вид работ</th><th>Что включено</th><th>Цена</th></tr>
+                <tr><th>Вид работ</th>{hasDetail ? <th>Что включено</th> : null}<th>Цена</th></tr>
               </thead>
               <tbody>
                 {d.priceTable.map((r) => (
                   <tr key={r.svc}>
                     <td>{r.svc}</td>
-                    <td style={{ color: "var(--muted)" }}>{r.detail}</td>
-                    <td><span className="p">от {r.price}</span> <span className="unit">{r.unit}</span></td>
+                    {hasDetail ? <td style={{ color: "var(--muted)" }}>{r.detail}</td> : null}
+                    <td><span className="p">{r.price}</span> <span className="unit">{r.unit}</span></td>
                   </tr>
                 ))}
               </tbody>
@@ -219,7 +204,7 @@ function PriceComposition({ d }) {
           </div>
         </div>
 
-        <div className="min-order"><I.doc className="ic" /> {d.minOrder} Точную смету бесплатно составит замерщик.</div>
+        <div className="min-order"><I.doc className="ic" /> {d.minOrder ? d.minOrder + " " : ""}Точную смету бесплатно составит замерщик.</div>
       </div>
     </section>
   );

@@ -193,7 +193,7 @@ h1, h2, h3, h4 { font-family: var(--font-head); font-weight: var(--head-weight);
   box-shadow: var(--shadow-lg); padding: 14px 16px; display: flex; gap: 12px; align-items: center;
   border: 1px solid var(--line);
 }
-.hero-badge .big { font-family: var(--font-head); font-weight: 800; font-size: 22px; color: var(--primary); line-height: 1; }
+.hero-badge .big { font-family: var(--font-head); font-weight: 800; font-size: 22px; color: var(--primary); line-height: 1; white-space: nowrap; }
 .hero-badge small { display: block; color: var(--muted); font-size: 12px; }
 .hero-badge.b1 { bottom: -22px; left: -26px; }
 .hero-badge.b2 { top: -20px; right: -18px; }
@@ -658,7 +658,7 @@ button.check-row { width: 100%; font: inherit; color: inherit; text-align: left;
 .dhero-lead { font-size: 19px; color: var(--ink-soft); margin: 20px 0 0; max-width: 42ch; }
 .dhero-price { display: inline-flex; align-items: baseline; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 14px 22px; margin: 26px 0 0; box-shadow: var(--shadow-sm); }
 .dhero-price .from { font-size: 14px; color: var(--muted); }
-.dhero-price .val { font-family: var(--font-head); font-weight: 800; font-size: 34px; color: var(--primary); line-height: 1; }
+.dhero-price .val { font-family: var(--font-head); font-weight: 800; font-size: 34px; color: var(--primary); line-height: 1; white-space: nowrap; }
 .dhero-price .with { font-size: 14px; color: var(--ink-soft); font-weight: 600; }
 .dhero-bullets { list-style: none; padding: 0; margin: 24px 0 0; display: flex; flex-direction: column; gap: 11px; }
 .dhero-bullets li { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--ink-soft); }

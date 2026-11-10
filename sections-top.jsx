@@ -116,7 +116,6 @@ function Directions({ onLead }) {
                   <h3>{d.title}</h3>
                   <p className="desc">{d.desc}</p>
                   <div className="dir-price">
-                    <span className="from">от</span>
                     <span className="val">{d.price}</span>
                     <span className="from">{d.unit}</span>
                   </div>

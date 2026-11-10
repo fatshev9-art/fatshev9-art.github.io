@@ -25,10 +25,9 @@ const WIN_PROFILES = [
   { id: "prem", label: "Тёплый премиум", k: 1.45, hint: "6 камер · для сибирской зимы и частных домов" },
 ];
 const WIN_OPTIONS = [
-  { id: "sill", label: "Подоконник", add: 1500 },
-  { id: "slopes", label: "Откосы", add: 2800 },
-  { id: "net", label: "Москитная сетка", add: 900 },
-  { id: "turnkey", label: "Установка под ключ", add: 3500 },
+  { id: "sill", label: "Подоконник" },
+  { id: "slopes", label: "Откосы" },
+  { id: "net", label: "Москитная сетка" },
 ];
 
 const CEIL_TYPES = [
@@ -36,13 +35,14 @@ const CEIL_TYPES = [
   { id: "gloss", label: "Глянцевый", m2: 450, hint: "Зрительно выше потолок" },
   { id: "satin", label: "Сатиновый", m2: 430, hint: "Мягкий блеск" },
 ];
-const LIGHT_PRICE = 700;
+const WIN_PRICE_M2 = 20000;
+const CEIL_PRICE_M2 = 1300;
 
 const FURN_TYPES = [
-  { id: "kitchen", label: "Кухня", pm: 24900 },
-  { id: "wardrobe", label: "Шкаф-купе", pm: 16900 },
-  { id: "garderob", label: "Гардеробная", pm: 19900 },
-  { id: "kids", label: "Детская", pm: 18900 },
+  { id: "kitchen", label: "Кухня", pm: 17000 },
+  { id: "wardrobe", label: "Шкаф-купе", pm: 12000 },
+  { id: "garderob", label: "Гардеробная", pm: 12000 },
+  { id: "kids", label: "Другая мебель на заказ", pm: 10000 },
 ];
 const FURN_FACADES = [
   { id: "ldsp", label: "ЛДСП", k: 1.0, hint: "Практично и недорого" },
@@ -57,28 +57,24 @@ function calcWindows(s) {
   const prof = WIN_PROFILES.find((p) => p.id === s.profile);
   if (!cfg || !prof) return null;
   const area = (s.width / 1000) * (s.height / 1000);
-  const sizeK = Math.min(1.6, Math.max(0.85, area / cfg.stdArea));
-  let total = cfg.base * sizeK * prof.k;
-  const lines = [
-    { l: `${cfg.label}, ${s.width}×${s.height} мм`, v: round100(cfg.base * sizeK) },
-    { l: `Профиль «${prof.label}» (×${prof.k})`, v: round100(cfg.base * sizeK * (prof.k - 1)) },
-  ];
-  WIN_OPTIONS.forEach((o) => {
-    if (s.opts[o.id]) { total += o.add; lines.push({ l: o.label, v: o.add }); }
-  });
-  return { total: round100(total), lines };
+  const total = round100(area * WIN_PRICE_M2);
+  const wishes = [`профиль «${prof.label}»`].concat(WIN_OPTIONS.filter((o) => s.opts[o.id]).map((o) => o.label.toLowerCase()));
+  return {
+    total,
+    lines: [
+      { l: `${cfg.label}, ${s.width}×${s.height} мм, ${area.toFixed(2).replace(".", ",")} м² × ${fmt(WIN_PRICE_M2)} ₽ (${wishes.join(", ")})`, v: total },
+    ],
+  };
 }
 
 function calcCeiling(s) {
   const t = CEIL_TYPES.find((x) => x.id === s.ceilType);
   if (!t) return null;
-  const cloth = t.m2 * s.area;
-  const lights = s.lights * LIGHT_PRICE;
+  const total = round100(CEIL_PRICE_M2 * s.area);
   return {
-    total: round100(cloth + lights),
+    total,
     lines: [
-      { l: `Полотно «${t.label}», ${s.area} м² × ${t.m2} ₽`, v: round100(cloth) },
-      ...(s.lights ? [{ l: `Светильники, ${s.lights} шт × ${LIGHT_PRICE} ₽`, v: lights }] : []),
+      { l: `Потолок «${t.label}», ${s.area} м² × ${fmt(CEIL_PRICE_M2)} ₽` + (s.lights ? `, светильников: ${s.lights} шт` : ""), v: total },
     ],
   };
 }
@@ -87,12 +83,11 @@ function calcFurniture(s) {
   const t = FURN_TYPES.find((x) => x.id === s.furnType);
   const f = FURN_FACADES.find((x) => x.id === s.facade);
   if (!t || !f) return null;
-  const base = t.pm * s.length;
+  const total = round100(t.pm * s.length);
   return {
-    total: round100(base * f.k),
+    total,
     lines: [
-      { l: `${t.label}, ${s.length} пог. м × ${fmt(t.pm)} ₽`, v: round100(base) },
-      { l: `Фасады «${f.label}» (×${f.k})`, v: round100(base * (f.k - 1)) },
+      { l: `${t.label}, ${s.length} м² × ${fmt(t.pm)} ₽ (фасады «${f.label}»)`, v: total },
     ],
   };
 }
@@ -108,7 +103,7 @@ function CheckRow({ on, onClick, label, add }) {
     <button type="button" className={"check-row" + (on ? " on" : "")} onClick={onClick} role="checkbox" aria-checked={on}>
       <span className="check-box">{on ? <I.check style={{ width: 14, height: 14 }} /> : null}</span>
       <span className="lbl">{label}</span>
-      <span className="add">+{fmt(add)} ₽</span>
+      {add ? <span className="add">+{fmt(add)} ₽</span> : null}
     </button>
   );
 }
@@ -225,14 +220,14 @@ function Calculator({ open, onClose }) {
             <div>
               <div className="result-box">
                 <div className="from">Ваша цена</div>
-                <div className="big">от {fmt(result.total)} ₽</div>
+                <div className="big">{fmt(result.total)} ₽</div>
                 <p className="note">Точную смету составит замерщик, выезд по Новосибирску бесплатный.</p>
               </div>
               <div className="result-breakdown">
                 {result.lines.map((l) => (
                   <div className="li" key={l.l}><span>{l.l}</span><span>{fmt(l.v)} ₽</span></div>
                 ))}
-                <div className="li"><span><b>Итого, от</b></span><span>{fmt(result.total)} ₽</span></div>
+                <div className="li"><span><b>Итого</b></span><span>{fmt(result.total)} ₽</span></div>
               </div>
               <div className="field">
                 <label htmlFor="calc-phone">Телефон для точного расчёта</label>
@@ -287,7 +282,6 @@ function Calculator({ open, onClose }) {
               <OptCard key={c.id} sel={s.config === c.id} onClick={() => set({ config: c.id })}>
                 <span className="opt-vis"><WinPic kind={c.pic} /></span>
                 <b>{c.label}</b>
-                <span className="price-hint">от {fmt(c.base)} ₽</span>
               </OptCard>
             ))}
           </div>
@@ -319,7 +313,6 @@ function Calculator({ open, onClose }) {
             {WIN_PROFILES.map((p) => (
               <OptCard key={p.id} sel={s.profile === p.id} onClick={() => set({ profile: p.id })}>
                 <b>{p.label}</b><small>{p.hint}</small>
-                <span className="price-hint">коэффициент ×{p.k}</span>
               </OptCard>
             ))}
           </div>
@@ -328,7 +321,7 @@ function Calculator({ open, onClose }) {
       if (step === 4) return (
         <div>
           <h4 className="step-title">Дополнительно</h4>
-          <p className="step-hint">Отметьте, что нужно: цены фиксированные</p>
+          <p className="step-hint">Отметьте, что нужно: учтём при замере</p>
           {WIN_OPTIONS.map((o) => (
             <CheckRow key={o.id} on={!!s.opts[o.id]} label={o.label} add={o.add}
               onClick={() => set({ opts: { ...s.opts, [o.id]: !s.opts[o.id] } })} />
@@ -341,12 +334,11 @@ function Calculator({ open, onClose }) {
       if (step === 0) return (
         <div>
           <h4 className="step-title">Тип полотна</h4>
-          <p className="step-hint">Цена за квадратный метр с установкой</p>
+          <p className="step-hint">Цена 1 300 ₽ за квадратный метр</p>
           <div className="opt-grid cols-3">
             {CEIL_TYPES.map((t) => (
               <OptCard key={t.id} sel={s.ceilType === t.id} onClick={() => set({ ceilType: t.id })}>
                 <b>{t.label}</b><small>{t.hint}</small>
-                <span className="price-hint">{t.m2} ₽/м²</span>
               </OptCard>
             ))}
           </div>
@@ -365,7 +357,7 @@ function Calculator({ open, onClose }) {
       if (step === 2) return (
         <div>
           <h4 className="step-title">Светильники</h4>
-          <p className="step-hint">Врезка точечного светильника: {LIGHT_PRICE} ₽ за штуку</p>
+          <p className="step-hint">Укажите, сколько светильников нужно: учтём при замере</p>
           <div className="stepper">
             <button type="button" onClick={() => set({ lights: Math.max(0, s.lights - 1) })} aria-label="Меньше">−</button>
             <span className="v">{s.lights}</span>
@@ -379,12 +371,12 @@ function Calculator({ open, onClose }) {
       if (step === 0) return (
         <div>
           <h4 className="step-title">Что заказываем?</h4>
-          <p className="step-hint">Цена за погонный метр с фурнитурой и сборкой</p>
+          <p className="step-hint">Цена за квадратный метр</p>
           <div className="opt-grid cols-2">
             {FURN_TYPES.map((t) => (
               <OptCard key={t.id} sel={s.furnType === t.id} onClick={() => set({ furnType: t.id })}>
                 <b>{t.label}</b>
-                <span className="price-hint">от {fmt(t.pm)} ₽/пог. м</span>
+                <span className="price-hint">{fmt(t.pm)} ₽/м²</span>
               </OptCard>
             ))}
           </div>
@@ -392,11 +384,11 @@ function Calculator({ open, onClose }) {
       );
       if (step === 1) return (
         <div>
-          <h4 className="step-title">Длина, погонных метров</h4>
+          <h4 className="step-title">Площадь, м²</h4>
           <p className="step-hint">Примерно, точные размеры снимет замерщик</p>
           <div className="slider-wrap">
-            <div className="slider-val">{s.length} пог. м</div>
-            <input type="range" min="1" max="10" step="0.5" value={s.length} onChange={(e) => set({ length: +e.target.value })} aria-label="Длина, погонных метров" />
+            <div className="slider-val">{s.length} м²</div>
+            <input type="range" min="1" max="10" step="0.5" value={s.length} onChange={(e) => set({ length: +e.target.value })} aria-label="Площадь, м²" />
           </div>
         </div>
       );
@@ -407,7 +399,6 @@ function Calculator({ open, onClose }) {
             {FURN_FACADES.map((f) => (
               <OptCard key={f.id} sel={s.facade === f.id} onClick={() => set({ facade: f.id })}>
                 <b>{f.label}</b><small>{f.hint}</small>
-                <span className="price-hint">коэффициент ×{f.k}</span>
               </OptCard>
             ))}
           </div>
@@ -433,7 +424,7 @@ function Calculator({ open, onClose }) {
               onClick={() => { if (busy) return; if (step === 0) { setFlow(null); } else setStep(step - 1); }}>Назад</button>
             <div className="run">
               {result && !isResult ? (
-                <div className="run-from"><small>уже получается</small><b>от {fmt(result.total)} ₽</b></div>
+                <div className="run-from"><small>уже получается</small><b>{fmt(result.total)} ₽</b></div>
               ) : null}
               {!isResult ? (
                 <button className="btn btn-primary" type="button" disabled={!canNext} style={{ opacity: canNext ? 1 : 0.45 }}

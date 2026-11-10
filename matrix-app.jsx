@@ -28,14 +28,14 @@ const MX_TILES = [
   Object.assign({}, MX_DIR.balkony, { title: "Балконы" }),
   MX_DIR.vitrazhi,
   { key: "kuhni", icon: "kitchen", img: "img/pf-7.jpg", title: "Кухни", desc: "Прямые, угловые, П-образные и с островом",
-    price: "14 900 ₽", unit: "/пог. м", href: "/kuhni" },
+    price: "17 000 ₽", unit: "/м²", href: "/kuhni" },
   { key: "mebel", icon: "dressing", img: "img/pf-8.jpg", title: "Гардеробные", desc: "Гардеробные комнаты и прихожие по вашим размерам",
-    price: "22 000 ₽", unit: "", href: "/mebel",
+    price: "12 000 ₽", unit: "/м²", href: "/mebel",
     only: ["Гардеробные на заказ", "Прихожие на заказ"],
     subTitle: "Какая гардеробная или прихожая вам нужна",
     subLead: "Гардеробная со стеллажами, штангами и полками или прихожая со шкафом, вешалкой и зеркалом. Соберём по вашим размерам." },
   { key: "mebel", icon: "wardrobe", img: "img/pf-9.jpg", title: "Шкафы-купе", desc: "Встроенные и корпусные, по вашим размерам",
-    price: "11 900 ₽", unit: "/пог. м", href: "/mebel",
+    price: "12 000 ₽", unit: "/м²", href: "/mebel",
     only: ["Шкафы-купе на заказ", "Встроенные шкафы"],
     subTitle: "Какой шкаф-купе вам нужен",
     subLead: "Соберём встроенный или корпусный шкаф-купе по вашим размерам. Двери с зеркалом или из ЛДСП." },
@@ -53,7 +53,6 @@ function MatrixCat({ dirTitle, c, onLead }) {
           : <span className="mx-cat-ic">{Ic ? <Ic /> : null}</span>}
       </span>
       <span className="mx-cat-t">{c.title}</span>
-      <span className="mx-cat-p">от {c.from}{c.unit || ""}</span>
       <span className="mx-cat-go">{c.href ? "Подробнее" : "Рассчитать"}</span>
     </>
   );
@@ -154,15 +153,13 @@ function MatrixGrid({ onLead }) {
       ) : (
         <div className="mx-panel-fallback">
           <Ph label={dir.title} icon={dir.icon} img={dir.img} style={{ height: 220 }} />
-          <p>{dir.desc}. От {dir.price}{dir.unit || ""}.</p>
+          <p>{dir.desc}. {dir.price}{dir.unit || ""}.</p>
         </div>
       )}
 
       <div className="mx-panel-foot">
         <span className="mx-panel-foot-note">
-          {cats.length > 0
-            ? "Цены примерные, точную посчитает замерщик бесплатно."
-            : "Точную цену посчитает замерщик бесплатно."}
+          Точную цену посчитает замерщик бесплатно.
         </span>
         <span className="mx-panel-foot-cta">
           {dir.href && <a className="btn btn-outline" href={dir.href}>Все варианты и цены <I.arrow style={{ width: 15, height: 15 }} /></a>}
@@ -190,7 +187,7 @@ function MatrixGrid({ onLead }) {
                 >
                   <span className="mx-ic">{Ic ? <Ic /> : null}</span>
                   <span className="mx-tile-title">{d.title}</span>
-                  <span className="mx-tile-price">от {d.price}{d.unit}</span>
+                  <span className="mx-tile-price">{d.price}{d.unit}</span>
                   <span className="mx-tile-mark" aria-hidden="true">{active ? "–" : "+"}</span>
                 </button>
                 {panel && rowEnd === i ? panel : null}
