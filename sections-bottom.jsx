@@ -210,6 +210,7 @@ function Footer() {
               <li><a href={home + "#promo"}>Условия работы</a></li>
               <li><a href="/o-nas">О компании</a></li>
               <li><a href="/policy">Обработка персональных данных</a></li>
+              <li><a href="/soglashenie">Пользовательское соглашение</a></li>
             </ul>
             <a className="btn btn-primary ftr-cta" href="#lead">Заказать бесплатный замер</a>
           </div>
