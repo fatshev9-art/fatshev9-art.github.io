@@ -205,6 +205,8 @@ function Footer() {
           <div className="ftr-contact">
             <h5>Связаться</h5>
             <b><a href={PHONE_HREF} className="ftr-phone">{PHONE}</a></b>
+            <div className="small"><a href={EMAIL_HREF}>{EMAIL}</a></div>
+            <div className="small">{ADDRESS}</div>
             <div className="small">Новосибирск и область. Можно позвонить или оставить заявку</div>
             <ul>
               <li><a href={home + "#promo"}>Условия работы</a></li>

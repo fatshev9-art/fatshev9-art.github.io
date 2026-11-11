@@ -62,7 +62,7 @@ function calcWindows(s) {
   return {
     total,
     lines: [
-      { l: `${cfg.label}, ${s.width}×${s.height} мм, ${area.toFixed(2).replace(".", ",")} м² × ${fmt(WIN_PRICE_M2)} ₽ (${wishes.join(", ")})`, v: total },
+      { l: `${cfg.label}, ${s.width}×${s.height} мм, ${area.toFixed(2).replace(".", ",")} м² × ${fmt(WIN_PRICE_M2)} руб. (${wishes.join(", ")})`, v: total },
     ],
   };
 }
@@ -74,7 +74,7 @@ function calcCeiling(s) {
   return {
     total,
     lines: [
-      { l: `Потолок «${t.label}», ${s.area} м² × ${fmt(CEIL_PRICE_M2)} ₽` + (s.lights ? `, светильников: ${s.lights} шт` : ""), v: total },
+      { l: `Потолок «${t.label}», ${s.area} м² × ${fmt(CEIL_PRICE_M2)} руб.` + (s.lights ? `, светильников: ${s.lights} шт` : ""), v: total },
     ],
   };
 }
@@ -87,7 +87,7 @@ function calcFurniture(s) {
   return {
     total,
     lines: [
-      { l: `${t.label}, ${s.length} м² × ${fmt(t.pm)} ₽ (фасады «${f.label}»)`, v: total },
+      { l: `${t.label}, ${s.length} м² × ${fmt(t.pm)} руб. (фасады «${f.label}»)`, v: total },
     ],
   };
 }
@@ -103,7 +103,7 @@ function CheckRow({ on, onClick, label, add }) {
     <button type="button" className={"check-row" + (on ? " on" : "")} onClick={onClick} role="checkbox" aria-checked={on}>
       <span className="check-box">{on ? <I.check style={{ width: 14, height: 14 }} /> : null}</span>
       <span className="lbl">{label}</span>
-      {add ? <span className="add">+{fmt(add)} ₽</span> : null}
+      {add ? <span className="add">+{fmt(add)} руб.</span> : null}
     </button>
   );
 }
@@ -177,7 +177,7 @@ function Calculator({ open, onClose }) {
       form: "calc",
       phone,
       hp,
-      calc: { title: FLOWS[flow].title, lines: result.lines.map((l) => `${l.l}: ${fmt(l.v)} ₽`), total: result.total },
+      calc: { title: FLOWS[flow].title, lines: result.lines.map((l) => `${l.l}: ${fmt(l.v)} руб.`), total: result.total },
     }).then((ok) => {
       if (id !== reqRef.current) return;
       setBusy(false);
@@ -220,14 +220,14 @@ function Calculator({ open, onClose }) {
             <div>
               <div className="result-box">
                 <div className="from">Ваша цена</div>
-                <div className="big">{fmt(result.total)} ₽</div>
+                <div className="big">{fmt(result.total)} руб.</div>
                 <p className="note">Точную смету составит замерщик, выезд по Новосибирску бесплатный.</p>
               </div>
               <div className="result-breakdown">
                 {result.lines.map((l) => (
-                  <div className="li" key={l.l}><span>{l.l}</span><span>{fmt(l.v)} ₽</span></div>
+                  <div className="li" key={l.l}><span>{l.l}</span><span>{fmt(l.v)} руб.</span></div>
                 ))}
-                <div className="li"><span><b>Итого</b></span><span>{fmt(result.total)} ₽</span></div>
+                <div className="li"><span><b>Итого</b></span><span>{fmt(result.total)} руб.</span></div>
               </div>
               <div className="field">
                 <label htmlFor="calc-phone">Телефон для точного расчёта</label>
@@ -334,7 +334,7 @@ function Calculator({ open, onClose }) {
       if (step === 0) return (
         <div>
           <h4 className="step-title">Тип полотна</h4>
-          <p className="step-hint">Цена 1 300 ₽ за квадратный метр</p>
+          <p className="step-hint">Цена 1 300 руб. за квадратный метр</p>
           <div className="opt-grid cols-3">
             {CEIL_TYPES.map((t) => (
               <OptCard key={t.id} sel={s.ceilType === t.id} onClick={() => set({ ceilType: t.id })}>
@@ -376,7 +376,7 @@ function Calculator({ open, onClose }) {
             {FURN_TYPES.map((t) => (
               <OptCard key={t.id} sel={s.furnType === t.id} onClick={() => set({ furnType: t.id })}>
                 <b>{t.label}</b>
-                <span className="price-hint">{fmt(t.pm)} ₽/м²</span>
+                <span className="price-hint">{fmt(t.pm)} руб./м²</span>
               </OptCard>
             ))}
           </div>
@@ -424,7 +424,7 @@ function Calculator({ open, onClose }) {
               onClick={() => { if (busy) return; if (step === 0) { setFlow(null); } else setStep(step - 1); }}>Назад</button>
             <div className="run">
               {result && !isResult ? (
-                <div className="run-from"><small>уже получается</small><b>{fmt(result.total)} ₽</b></div>
+                <div className="run-from"><small>уже получается</small><b>{fmt(result.total)} руб.</b></div>
               ) : null}
               {!isResult ? (
                 <button className="btn btn-primary" type="button" disabled={!canNext} style={{ opacity: canNext ? 1 : 0.45 }}

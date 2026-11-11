@@ -205,6 +205,9 @@ I.roller = (p) => (
 
 const PHONE = "+7 (995) 569-01-10";
 const PHONE_HREF = "tel:+79955690110";
+const EMAIL = "lana.polezhaeva78@mail.ru";
+const EMAIL_HREF = "mailto:lana.polezhaeva78@mail.ru";
+const ADDRESS = "р.п. Кольцово, ул. Вознесенская, 4";
 
 const UTM_KEY = "liora_utm";
 const hasUtm = (q) => /(^|[?&])utm_/.test(q);
@@ -252,14 +255,14 @@ I.wardrobe = (p) => (
 );
 
 const DIRECTIONS = [
-  { key: "okna",       icon: "window",   img: "img/dir-okna.jpg",    title: "Пластиковые окна",  desc: "Замер, доставка и установка за 1 день", price: "20 000 ₽", unit: "/м²", href: "/okna" },
-  { key: "balkony",    icon: "balcony",  img: "img/dir-balkon.jpg",  title: "Балконы и лоджии",  desc: "Остекление, утепление и отделка под ключ", price: "70 000 ₽", unit: "", href: "/balkony" },
-  { key: "vitrazhi",   icon: "vitrage",  img: "img/dir-vitrazh.jpg", title: "Витражи",           desc: "Декоративное остекление для дома и офиса", price: "15 000 ₽", unit: "/м²", href: "/vitrazhi" },
-  { key: "teplyy_pol", icon: "heat",     img: "img/dir-teplo.jpg", title: "Тёплые полы",       desc: "Электрические и инфракрасные, под любое покрытие", price: "8 000 ₽", unit: "/м²", href: "/teplyy-pol" },
-  { key: "dveri_vhod", icon: "doorEntry",     img: "img/dir-dveri.jpg",   title: "Входные двери",     desc: "Металлические, с установкой и надёжным замком", price: "40 000 ₽", unit: "", href: "/dveri-vhodnye" },
-  { key: "dveri_mk",   icon: "doorInterior",     img: "img/dir-dveri.jpg",   title: "Межкомнатные двери", desc: "Экошпон, массив и шпон, с установкой", price: "15 000 ₽", unit: "", href: "/dveri-mezhkomnatnye" },
-  { key: "potolki",    icon: "ceiling",  img: "img/dir-potolki.jpg", title: "Натяжные потолки",  desc: "Матовые, глянцевые, сатиновые. Установка без пыли", price: "1 300 ₽", unit: "/м²", href: "/potolki" },
-  { key: "mebel",      icon: "furniture",img: "img/dir-mebel.jpg", title: "Мебель на заказ",   desc: "Кухни, шкафы-купе, гардеробные по вашим размерам", price: "10 000 ₽", unit: "/м²", href: "/mebel" },
+  { key: "okna",       icon: "window",   img: "img/dir-okna.jpg",    title: "Пластиковые окна",  desc: "Замер, доставка и установка за 1 день", price: "20 000 руб.", unit: "/м²", href: "/okna" },
+  { key: "balkony",    icon: "balcony",  img: "img/dir-balkon.jpg",  title: "Балконы и лоджии",  desc: "Остекление, утепление и отделка под ключ", price: "70 000 руб.", unit: "", href: "/balkony" },
+  { key: "vitrazhi",   icon: "vitrage",  img: "img/dir-vitrazh.jpg", title: "Витражи",           desc: "Декоративное остекление для дома и офиса", price: "15 000 руб.", unit: "/м²", href: "/vitrazhi" },
+  { key: "teplyy_pol", icon: "heat",     img: "img/dir-teplo.jpg", title: "Тёплые полы",       desc: "Электрические и инфракрасные, под любое покрытие", price: "8 000 руб.", unit: "/м²", href: "/teplyy-pol" },
+  { key: "dveri_vhod", icon: "doorEntry",     img: "img/dir-dveri.jpg",   title: "Входные двери",     desc: "Металлические, с установкой и надёжным замком", price: "40 000 руб.", unit: "", href: "/dveri-vhodnye" },
+  { key: "dveri_mk",   icon: "doorInterior",     img: "img/dir-dveri.jpg",   title: "Межкомнатные двери", desc: "Экошпон, массив и шпон, с установкой", price: "15 000 руб.", unit: "", href: "/dveri-mezhkomnatnye" },
+  { key: "potolki",    icon: "ceiling",  img: "img/dir-potolki.jpg", title: "Натяжные потолки",  desc: "Матовые, глянцевые, сатиновые. Установка без пыли", price: "1 300 руб.", unit: "/м²", href: "/potolki" },
+  { key: "mebel",      icon: "furniture",img: "img/dir-mebel.jpg", title: "Мебель на заказ",   desc: "Кухни, шкафы-купе, гардеробные по вашим размерам", price: "10 000 руб.", unit: "/м²", href: "/mebel" },
 ];
 
 const NUMBERS = [
@@ -297,4 +300,4 @@ const PORTFOLIO = [
   { img: "img/potolok-2.jpg", title: "Парящий потолок с контуром света", desc: "Световой контур по полотну, ровный матовый тон", icon: "ceiling" },
 ];
 
-Object.assign(window, { I, Ph, fmt, PHONE, PHONE_HREF, sendLead, DIRECTIONS, NUMBERS, WHY, STAGES, PORTFOLIO });
+Object.assign(window, { I, Ph, fmt, PHONE, PHONE_HREF, EMAIL, EMAIL_HREF, ADDRESS, sendLead, DIRECTIONS, NUMBERS, WHY, STAGES, PORTFOLIO });

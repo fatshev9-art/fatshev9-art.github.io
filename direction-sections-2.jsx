@@ -49,7 +49,7 @@ function PromoFinance({ d, onLead }) {
             <p>Оформляем при заключении договора, нужен только паспорт. Срок и условия уточняем в банке под ваш заказ.</p>
             <div className="timer">
               <div className="unit"><b>4</b><span>способа оплаты</span></div>
-              <div className="unit"><b>0 ₽</b><span>за замер и смету</span></div>
+              <div className="unit"><b>0 руб.</b><span>за замер и смету</span></div>
             </div>
           </div>
           <div className="fin-card">
