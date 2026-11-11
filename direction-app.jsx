@@ -81,8 +81,8 @@ function injectJsonLd(d) {
     {
       "@context": "https://schema.org", "@type": "Service",
       name: d.crumb + " в Новосибирске", areaServed: "Новосибирск",
-      provider: { "@type": "HomeAndConstructionBusiness", name: "ЛИОРА", telephone: PHONE, areaServed: "Новосибирск",
-        address: { "@type": "PostalAddress", addressLocality: "Новосибирск", addressRegion: "Новосибирская область", addressCountry: "RU" } },
+      provider: { "@type": "HomeAndConstructionBusiness", name: "ЛИОРА", telephone: PHONE, email: EMAIL, areaServed: "Новосибирск",
+        address: { "@type": "PostalAddress", streetAddress: "ул. Вознесенская, 4", addressLocality: "Кольцово", addressRegion: "Новосибирская область", addressCountry: "RU" } },
       offers: { "@type": "Offer", price: plainPrice(d.priceFrom), priceCurrency: "RUB", description: "Цена " + d.priceFrom + (d.priceWith ? ", " + d.priceWith : "") },
     },
     {
